@@ -1,18 +1,15 @@
-# DARK ZERO RADIO
+# DARK ZERO RADIO Schedule
 
-(THE MUSIC FROM THE DARKSIDE)
-
-Live broadcast schedule and OBS overlay project for DARK ZERO RADIO using the official laut.fm API.
+Live broadcast schedule for DARK ZERO RADIO using the official laut.fm API.
 
 ## Features
 
 - Automatic laut.fm schedule integration
-- ON AIR detection
-- Custom EBM / Darkwave covers
-- OBS compatible overlays
-- GitHub Pages support
+- ON AIR status
+- Custom EBM / Darkwave broadcast covers
 - Responsive HTML layout
 - Automatic schedule updates
+- GitHub Pages support
 
 ## Technologies
 
@@ -22,7 +19,7 @@ Live broadcast schedule and OBS overlay project for DARK ZERO RADIO using the of
 - laut.fm API
 - GitHub Pages
 
-## Live Schedule
+## Live Demo
 
 https://dark-zero-radio.github.io/dark-zero-schedule/
 
