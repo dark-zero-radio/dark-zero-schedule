@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title><span style="color:#ffffff;">DARK</span> <span style="color:#d40000;">ZERO</span> <span style="color:#ffffff;">RADIO</span> – TODAY</title>
+
+
+<style>
+:root{
+--dzr-red:#d40000;
+--dzr-dark:#2a0000;
+--dzr-bg:#070000;
+--dzr-glow:rgba(212,0,0,.45);
+}
+
+body{
+background:#000;
+color:var(--dzr-red);
+font-family:Arial,sans-serif;
+margin:0;
+padding:6px;
+}
+
+h1{
+text-align:center;
+font-size:28px;
+color:#fff;
+margin:15px 0;
+letter-spacing:2px;
+text-shadow:0 0 8px var(--dzr-red),0 0 18px var(--dzr-glow);
+}
+
+.subtitle{
+display:block;
+font-size:18px;
+margin-top:5px;
+color:#ffb3b3;
+}
+
+.home-btn{
+position:absolute;
+top:8px;
+right:8px;
+padding:4px 9px;
+border:1px solid var(--dzr-red);
+border-radius:5px;
+background:linear-gradient(180deg,#120000,#050000);
+color:#fff;
+text-decoration:none;
+font-size:12px;
+box-shadow:0 0 10px var(--dzr-glow);
+}
+
+.day-block{
+max-width:860px;
+margin:auto;
+background:linear-gradient(180deg,#120000,#050000);
+border:1px solid var(--dzr-red);
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 18px var(--dzr-glow);
+}
+
+.day-title{
+background:linear-gradient(90deg,#330000,#5a0000,#330000);
+padding:12px;
+color:#fff;
+font-weight:bold;
+text-align:center;
+text-shadow:0 0 10px var(--dzr-red);
+}
+
+table{width:100%;border-collapse:collapse;}
+th{
+background:#140000;
+color:#fff;
+padding:10px;
+border-bottom:1px solid #4a0000;
+}
+td{
+padding:10px;
+border-bottom:1px solid #220000;
+}
+tr:nth-child(even){background:#0d0000;}
+tr:hover{background:#170000;}
+
+.show-img{
+width:162px;
+height:72px;
+object-fit:cover;
+border-radius:8px;
+border:1px solid var(--dzr-red);
+box-shadow:0 0 8px var(--dzr-glow);
+}
+
+.show-name{
+font-weight:bold;
+font-size:18px;
+color:#fff;
+}
+
+.current-show{
+background:#1a0000!important;
+box-shadow:inset 0 0 20px rgba(212,0,0,.25);
+}
+
+.on-air{
+color:#ff3030;
+font-weight:bold;
+text-shadow:0 0 8px rgba(255,0,0,.6);
+}
+
+footer{
+text-align:center;
+margin-top:20px;
+color:#999;
+}
+</style>
+
+
+</head>
+
+<body>
+
+
+
+<div id="schedule"></div>
+
+<script>
+
+const imageBase="https://dark-zero-radio.com/covers/";
+
+const defaultImg="AUTO DJ.png";
+
+const djCovers={
+
+"#Synth-Pop":"#Synth-Pop.png",
+"#Synthwave - Minimal - Goldwave":"#Synthwave - Minimal - Goldwave.png",
+"(THE MUSIC FROM THE DARKSIDE)":"(THE MUSIC FROM THE DARKSIDE).png",
+"AFTERHOUR SYSTEM":"AFTERHOUR SYSTEM.png",
+"AFTERMIDNIGHT MANIFEST":"AFTERMIDNIGHT MANIFEST.png",
+"AFTERNOON WAVES":"AFTERNOON WAVES.png",
+
+"AUTO DJ Aggrotech, Industrial":"AUTO DJ Aggrotech, Industrial.png",
+"AUTO DJ Electro":"AUTO DJ Electro.png",
+"AUTO DJ Electropop":"AUTO DJ Electropop.png",
+"AUTO DJ NEW BEAT":"AUTO DJ NEW BEAT.png",
+"AUTO DJ New German Hardness":"AUTO DJ New German Hardness.png",
+"AUTO DJ THE MUSIC FROM THE DARKSIDE":"AUTO DJ THE MUSIC FROM THE DARKSIDE.png",
+"AUTO DJ":"AUTO DJ.png",
+
+"Between Velvet & Steel":"Between Velvet & Steel.png",
+"BLACK CITY NIGHTS":"BLACK CITY NIGHTS.png",
+"Black Spectrum":"Black Spectrum.png",
+"Body Music Archives":"Body Music Archives.png",
+
+"CLUB CONTROL":"CLUB CONTROL.png",
+"CLUB SYNTH SESSION":"CLUB SYNTH SESSION.png",
+
+"COLD STRUCTURES":"COLD STRUCTURES.png",
+
+"DARK ZERO RADIO PRIME":"DARK ZERO RADIO PRIME.png",
+"DARK ZERO RADIO – CLUB ROTATION":"DARK ZERO RADIO – CLUB ROTATION.png",
+"Dark X-Mas":"Dark X-Mas.png",
+
+"DJ Eisi Eisbrecher with Dark Culture":"DJ Eisi Eisbrecher with Dark Culture.png",
+
+"DJ VAMLYKTAN – Roctronics":"DJ VAMLYKTAN – Roctronics.png",
+"DJ Vamlyktan with Rock Metall NDH":"DJ Vamlyktan with Rock Metall NDH.png",
+"DJ Vamlyktan with 80s & 90 Rock∩n∩Gothic":"DJ Vamlyktan with 80s & 90 Rock∩n∩Gothic.png",
+
+"Dj. BbWarrior with Eletro, EBM, Industrial Party":"Dj. BbWarrior with Eletro, EBM, Industrial Party.png",
+"Dj. BbWarrior with Gothic Embrations":"Dj. BbWarrior with Gothic Embrations.png",
+"Dj. BbWarrior with Hard Rock & Metal Mania":"Dj. BbWarrior with Hard Rock & Metal Mania.png",
+
+"DZR Rotation 1":"DZR Rotation 1.png",
+"DZR Rotation 2":"DZR Rotation 2.png",
+"DZR Rotation 3":"DZR Rotation 3.png",
+
+"ELECTRIC DREAMS DARK ZERO RADIO":"ELECTRIC DREAMS DARK ZERO RADIO.png",
+"Empire Of Shadows":"Empire Of Shadows.png",
+"EUROPEAN FUTURE":"EUROPEAN FUTURE.png",
+
+"FLOOR AUTHORITY":"FLOOR AUTHORITY.png",
+"GLOBAL DARK SCENE":"GLOBAL DARK SCENE.png",
+"GOTHIC FREQUENCIES":"GOTHIC FREQUENCIES.png",
+
+"Industrial Cabaret Mass":"Industrial Cabaret Mass.png",
+"INDUSTRIAL CURRENT":"INDUSTRIAL CURRENT.png",
+
+"Laut & Düster":"Laut & Düster.png",
+
+"LOW FREQUENCY DREAMS":"LOW FREQUENCY DREAMS.png",
+"LOW VOLTAGE DISTRICT":"LOW VOLTAGE DISTRICT.png",
+
+"MACHINE WAKEUP":"MACHINE WAKEUP.png",
+"MIDWEEK AFTERHOURS":"MIDWEEK AFTERHOURS.png",
+"Minne & Maschinen":"Minne & Maschinen.png",
+"MORNING SIGNAL":"MORNING SIGNAL.png",
+
+"NDH MONOLITH":"NDH MONOLITH.png",
+"Neon Transmission":"Neon Transmission.png",
+
+"Nocturnal Empire":"Nocturnal Empire.png",
+"NOCTURNAL SIGNAL":"NOCTURNAL SIGNAL.png",
+"NOCTURNAL SIGNAL  2":"NOCTURNAL SIGNAL  2.png",
+
+"Paul Paradoxx (Alternative Energy)":"Paul Paradoxx (Alternative Energy).png",
+
+"POST-PUNK DISTRICT":"POST-PUNK DISTRICT.png",
+
+"Post-punk-Goldwave-Dreampop-Synth-Dreampunk":"Post-punk-Goldwave-Dreampop-Synth-Dreampunk.png",
+
+"PRIME CONTROL":"PRIME CONTROL.png",
+
+"Second Wave":"Second Wave.png",
+
+"SHADOW TRANSMISSION":"SHADOW TRANSMISSION.png",
+
+"SOUNDWORKS presents EBM":"SOUNDWORKS presents EBM.png",
+
+"STAHLWERK FREQUENZ":"STAHLWERK FREQUENZ.png",
+"STEEL INDUSTRY":"STEEL INDUSTRY.png",
+"STEEL MORNING PROTOCOL":"STEEL MORNING PROTOCOL.png",
+
+"Subterranean Frequency":"Subterranean Frequency.png",
+
+"Symphonie der Schatten":"Symphonie der Schatten.png",
+
+"SYNTH CITY":"SYNTH CITY.png",
+"Synthpop Club Ultimate":"Synthpop Club Ultimate.png",
+
+"UNDERGROUND SELECTION":"UNDERGROUND SELECTION.png",
+
+"We are Dark Part I":"We are Dark Part I.png"
+
+};
+function getCurrentDay(){
+
+const d=
+new Date().getDay();
+
+const map=[
+"sun",
+"mon",
+"tue",
+"wed",
+"thu",
+"fri",
+"sat"
+];
+
+return map[d];
+
+}
+
+function getImage(name){
+
+for(let key in djCovers){
+
+if(
+name.includes(key)
+)
+
+return imageBase+
+djCovers[key];
+
+}
+
+return imageBase+
+defaultImg;
+
+}
+
+async function loadSchedule(){
+
+const res=
+await fetch(
+"https://api.laut.fm/station/darkzeroradio/schedule"
+);
+
+const data=
+await res.json();
+
+const today=
+getCurrentDay();
+
+const shows=
+data
+.filter(
+x=>x.day===today
+)
+.sort(
+(a,b)=>
+a.hour-b.hour
+);
+
+let html=`
+
+<div class="day-block">
+
+<div class="day-title">
+
+${today.toUpperCase()}
+
+</div>
+
+<table>
+
+<tr>
+
+<th>START</th>
+
+<th>BILD</th>
+
+<th>END</th>
+
+<th>SENDUNG</th>
+
+</tr>
+
+`;
+
+const now=
+new Date()
+.getHours();
+
+shows.forEach(show=>{
+
+const live=
+
+(show.hour<=now
+&&
+show.end_time>now)
+
+?
+
+`<span class="on-air">
+ON AIR
+</span>`
+
+:
+
+"";
+
+const active=
+live
+?
+"current-show"
+:
+"";
+
+html+=`
+
+<tr class="${active}">
+
+<td>
+${show.hour}:00
+</td>
+
+<td>
+
+<img
+class="show-img"
+src="${getImage(show.name)}">
+
+</td>
+
+<td>
+${show.end_time}:00
+</td>
+
+<td class="show-name">
+
+${show.name}
+
+${live}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+html+=`
+</table>
+</div>
+`;
+
+document
+.getElementById(
+"schedule"
+)
+.innerHTML=
+html;
+
+}
+
+loadSchedule();
+
+setInterval(
+loadSchedule,
+60000
+);
+
+</script>
+
+
+<footer></footer>
+
+
+</body>
+</html>
