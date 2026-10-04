@@ -29,18 +29,28 @@ Dark Wave • EBM • Gothic • Industrial
 
 https://dark-zero-radio.com/
 
+## Privacy
+
+This project uses the public laut.fm API to retrieve the broadcast schedule and information about the selected station.
+
+When accessing the laut.fm API, technical information may be transmitted to laut.fm. This may include the IP address, web browser, operating system and other technical information.
+
+This data transmission takes place as part of the technical use of the laut.fm API.
+
+For more information about the processing of personal data, please refer to the laut.fm Privacy Policy:
+
+https://laut.fm/pages/privacy
+
+More information about the laut.fm API:
+
+https://docs.api.laut.fm/
+
 ## Legal Notice
 
-DARK ZERO RADIO
-Paul Paradoxx
+This project is an independent project by DARK ZERO RADIO / Paul Paradoxx.
 
-This project is an independent project of DARK ZERO RADIO.
+There is no official affiliation, partnership or support from laut.fm, LAUT AG or GitHub.
 
-This repository is not affiliated with, endorsed by, or officially
-connected to laut.fm, GitHub, or any other third-party service
-mentioned in this repository.
-
-laut.fm, GitHub and other product or service names mentioned in
-this repository are trademarks of their respective owners.
+laut.fm, LAUT AG, GitHub and other mentioned product and service names are trademarks or names of their respective owners.
 
 Copyright © 2026 Paul Paradoxx / DARK ZERO RADIO
